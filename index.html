@@ -68,7 +68,9 @@
               <!--接收nvue发送的数据 -->
 			function uniEvent(data) {
 				console.log(JSON.stringify(data), 'HTML 接受APP发送过来的消息 (APP端)');
+				this.name = data.name // 赋值
 				app.name = data.name // 赋值
+			
 			};
  
             <!--向nvue发送数据 -->
