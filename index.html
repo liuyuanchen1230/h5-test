@@ -33,6 +33,7 @@
 			
 			<div class="btn-red" style="margin-bottom: 100px;">
 				app传过来的值：{{name}}
+					<button class="btn btn-red" type="button" id="postMessage">postMessage</button>
 			</div>
 			
 			
@@ -77,16 +78,15 @@
 				methods: {},
 				
 			})
-			<!--接收nvue发送的数据 -->
+			// <!--接收nvue发送的数据 -->
 			function tokenFromApp(data) {
 				console.log(JSON.stringify(data), 'HTML 接受APP发送过来的消息 (APP端)');
-				this.name = data.name // 赋值
-				app.name = data.name // 赋值
+				this.name = data.szrdAccessToken // 赋值
+				app.name = data.szrdAccessToken // 赋值
 			};
 			 
-			<!--向nvue发送数据 -->
+			// <!--向nvue发送数据 -->
 			document.addEventListener('UniAppJSBridgeReady', function() {
-					
 				document.querySelector("#postMessage").addEventListener('click', function() {
 					console.log("点击了------")
 					uni.postMessage({
