@@ -12,7 +12,7 @@
 			msgFromApp(); // 调用msgFromApp函数
 			function msgFromApp(data) {
 			    console.log("---getMsgFromApp---", data);
-				document.getElementsByClassName("text")[0].innerText = data;
+				document.getElementsByClassName("text")[0].innerText = JSON.parse(data).szrdAccessToken;
 			}
 		</script>
 	</body>
