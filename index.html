@@ -30,6 +30,12 @@
 	<body>
 
 		<div id="app">
+			
+			<div class="btn-red" style="margin-bottom: 100px;">
+				app传过来的值：{{name}}
+			</div>
+			
+			
 			<a href="./a.html">
 				toA
 			</a>
@@ -68,8 +74,28 @@
 				onShow() {
 
 				},
-				methods: {}
+				methods: {},
+				
 			})
+			<!--接收nvue发送的数据 -->
+			function uniEvent(data) {
+				console.log(JSON.stringify(data), 'HTML 接受APP发送过来的消息 (APP端)');
+				this.name = data.name // 赋值
+				app.name = data.name // 赋值
+			};
+			 
+			<!--向nvue发送数据 -->
+			document.addEventListener('UniAppJSBridgeReady', function() {
+					
+				document.querySelector("#postMessage").addEventListener('click', function() {
+					console.log("点击了------")
+					uni.postMessage({
+						data: {
+							action: 'message'
+						}
+					});
+				})
+			});
 		</script>
 	</body>
 </html>
