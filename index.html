@@ -1,112 +1,31 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>本地网页</title>
-		<style type="text/css">
-			.btn {
-				display: block;
-				margin: 20px auto;
-				padding: 5px;
-				background-color: #007aff;
-				border: 0;
-				color: #ffffff;
-				height: 40px;
-				width: 200px;
-			}
+<html lang="en">
 
-			.btn-red {
-				background-color: #dd524d;
-			}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Receiver and Sender</title>
+</head>
 
+<body>
+    <h1>消息接收与发送页面</h1>
+    <button id="sendMessageButton">点击向父页面发送消息</button>
+    <div id="messageDisplay">接收到的消息会显示在这里</div>
 
-			.desc {
-				padding: 10px;
-				color: #999999;
-			}
-		</style>
-	</head>
-	<body>
+    <script>
+        // 监听来自父页面的消息
+        window.addEventListener('message', function (event) {
+            const messageDisplay = document.getElementById('messageDisplay');
+            messageDisplay.textContent = `接收到来自父页面的消息: ${JSON.stringify(event.data)}`;
+        });
 
-		<div id="app">
-			
-			<div class="btn-red" style="margin-bottom: 100px;">
-				app传过来的值：{{name}}
-					<button class="btn btn-red" type="button" id="postMessage">postMessage</button>
-			</div>
-			<van-button type="default">默认按钮</van-button>
-			
-			<van-button type="primary">主要按钮</van-button>
-			
-			<van-button type="info">信息按钮</van-button>
-			
-			<van-button type="warning">警告按钮</van-button>
-			
-			<van-button type="danger">危险按钮</van-button>
-	
-			
-			<a href="./a.html">
-				toA
-			</a>
-			<a href="./b.html">
-				toB
-			</a>
-			<div class="btn-red">
-				index.html
-			</div>
-			
-			
-			<div style="margin-top: 100px;">iframe嵌套</div>
-			<iframe src="./b.html" frameborder="0">
-			</iframe>
-		</div>
+        // 点击按钮向父页面发送消息
+        const sendMessageButton = document.getElementById('sendMessageButton');
+        sendMessageButton.addEventListener('click', function () {
+            const message = { type: 'childToParent', data: '这是来自子页面的消息' };
+            window.parent.postMessage(message, '*');
+        });
+    </script>
+</body>
 
-
-
-		<!-- uni 的 SDK -->
-		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-		<script type="text/javascript" src="./js/uni.webview.1.5.6.js"></script>
-		<script type="text/javascript" src="./js/vant.min.js"></script>
-		<!--引入vue -->
-		<script type="text/javascript">
-			var app = new Vue({
-				el: '#app',
-				data: {
-
-					name: ''
-				},
-				mounted() {
-
-				},
-				onLoad() {
-Toast('提示内容');
-				},
-				onShow() {
-Toast('提示内容2222222');
-				},
-				methods: {},
-				
-			})
-			// <!--接收nvue发送的数据 -->
-			function tokenFromApp(data) {
-				console.log(JSON.stringify(data), 'HTML 接受APP发送过来的消息 (APP端)');
-				this.name = data.szrdAccessToken // 赋值
-				app.name = data.szrdAccessToken // 赋值
-			};
-			 
-			// <!--向nvue发送数据 -->
-			document.addEventListener('UniAppJSBridgeReady', function() {
-				document.querySelector("#postMessage").addEventListener('click', function() {
-					console.log("点击了------")
-					uni.postMessage({
-						data: {
-							appId: 'appid---123456789123123',
-							
-						}
-					});
-				})
-			});
-		</script>
-	</body>
-</html>
+</html>    
