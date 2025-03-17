@@ -18,10 +18,12 @@
     if (e.data.type === 'FROM_PARENT') {
       console.log('收到父页面消息:', e.data.data);
       // 可回复消息
-      e.source.postMessage(
+      window.parent.postMessage(
         { type: 'REPLY', data: 'Message Received' },
         e.origin
       );
+                    const messageDisplay = document.getElementById('messageDisplay');
+            messageDisplay.textContent = `接收到来自父页面的消息: JSON.stringify(e.data)`;
     }
   });
         // 点击按钮向父页面发送消息
