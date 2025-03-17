@@ -14,12 +14,16 @@
 
     <script>
         // 监听来自父页面的消息
-        window.addEventListener('message', function (event) {
-            const messageDisplay = document.getElementById('messageDisplay');
-            console.log(${JSON.stringify(event.data))
-            messageDisplay.textContent = `接收到来自父页面的消息: ${JSON.stringify(event.data)}`;
-        });
-
+       window.addEventListener('message', (e) => {
+    if (e.data.type === 'FROM_PARENT') {
+      console.log('收到父页面消息:', e.data.data);
+      // 可回复消息
+      e.source.postMessage(
+        { type: 'REPLY', data: 'Message Received' },
+        e.origin
+      );
+    }
+  });
         // 点击按钮向父页面发送消息
         const sendMessageButton = document.getElementById('sendMessageButton');
         sendMessageButton.addEventListener('click', function () {
