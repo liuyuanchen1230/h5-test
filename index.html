@@ -15,10 +15,11 @@
     <script>
         // 监听来自父页面的消息
        window.addEventListener('message', (e) => {
+           console.log(e)
     if (e.data.type === 'FROM_PARENT') {
       console.log('收到父页面消息:', e.data.data);
       // 可回复消息
-      window.parent.postMessage(
+      window.postMessage(
         { type: 'REPLY', data: 'Message Received' },
         e.origin
       );
