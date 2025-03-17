@@ -16,6 +16,7 @@
         // 监听来自父页面的消息
         window.addEventListener('message', function (event) {
             const messageDisplay = document.getElementById('messageDisplay');
+            console.log(${JSON.stringify(event.data))
             messageDisplay.textContent = `接收到来自父页面的消息: ${JSON.stringify(event.data)}`;
         });
 
