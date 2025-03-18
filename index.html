@@ -14,15 +14,19 @@
 
     <script>
         // 监听来自父页面的消息
-       window.addEventListener('message', function (event) {
-            const message = event.data;
-           console.log(message)
-            console.log('Received message from parent:', message);
-        });
+window.addEventListener('message', function (event) {
+   		const message = event.data;
+   		console.log(message)
+   		console.log('HTML接收数智人大H5发送过来的消息（SZRD-H5）:', message);
+//拿到szrdAccessToken进行登录等操作
+// let szrdAccessToken= message.szrdAccessToken
+});
         // 点击按钮向父页面发送消息
         const sendMessageButton = document.getElementById('sendMessageButton');
         sendMessageButton.addEventListener('click', function () {
-            const message = { type: 'childToParent', data: '这是来自子页面的消息' };
+            const message = {data: {
+	appId: 'appid---123456789123123' //第三方应用ID
+}}; 
             window.postMessage(message, '*');
         });
     </script>
