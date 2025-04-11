@@ -14,6 +14,8 @@
 
 		<script>
 			// 监听来自父页面的消息
+			// 在iframe页面控制台执行
+window.parent.postMessage({test: 'hello'}, '*')
 			window.postMessage({
 				data: {
 					appId: '5xZtNq01x0L6WmMnG7gFAo'//第三方应用ID
