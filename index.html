@@ -35,7 +35,7 @@ window.parent.postMessage({test: 'hello'}, '*')
 			const message = {data: {
 			appId: '5xZtNq01x0L6WmMnG7gFAo' //第三方应用ID
 			}}; 
-			window.postMessage(message, '*');
+			window.parent.postMessage(message, '*');
 
 			});
 			
