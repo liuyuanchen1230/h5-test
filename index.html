@@ -23,12 +23,20 @@ window.addEventListener('message', function (event) {
 });
         // 点击按钮向父页面发送消息
         const sendMessageButton = document.getElementById('sendMessageButton');
-        sendMessageButton.addEventListener('click', function () {
-            const message = {data: {
-	appId: 'appid---123456789123123' //第三方应用ID
-}}; 
-            window.postMessage(message, '*');
-        });
+        //sendMessageButton.addEventListener('click', function () {
+            //const message = {data: {
+	//appId: 'appid---123456789123123' //第三方应用ID
+//}}; 
+            //window.postMessage(message, '*');
+
+        //});
+ window.postMessage(
+{
+    data:{
+    appId：'5xZtNq01x0L6WmMnG7gFAo＇//第三方应用ID
+    }
+},'*'
+)
     </script>
 </body>
 
