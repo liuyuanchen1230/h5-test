@@ -38,7 +38,22 @@ window.parent.postMessage({test: 'hello'}, '*')
 			window.parent.postMessage(message, '*');
 
 			});
-			
+
+
+
+			// 调用定位接口
+window.getLocationFromApp();
+
+// 调用扫一扫接口
+window.scanCodeFromApp();
+
+			window.addEventListener('message', function(event) {
+  if (event.data.type === 'locationInfo') {
+    console.log('定位信息:', event.data.data);
+  } else if (event.data.type === 'scanResult') {
+    console.log('扫码结果:', event.data.data);
+  }
+});
 		</script>
 	</body>
 
