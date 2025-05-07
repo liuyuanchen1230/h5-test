@@ -35,6 +35,8 @@
 
         <div class="btn-red">
             nvue传过来的值：{{name}}
+            定位的值：{{location}}
+            扫一扫的值：{{scanInfo}}
         </div>
     </div>
 
@@ -42,8 +44,9 @@
     <p class="desc">网页向应用发送消息。注意：小程序端应用会在此页面后退时接收到消息。</p>
     <div class="btn-list">
         <button class="btn btn-red" type="button" id="postMessage">postMessage</button>
-        <button class="btn" type="button" id="getLocation">获取定位</button>
-        <button class="btn" type="button" id="scanCode">扫一扫</button>
+
+        <button id="getLocationButton">获取定位</button>
+  <button id="scanCodeButton">扫一扫</button>
     </div>
     <!-- uni 的 SDK -->
     <script type="text/javascript" src="https://unpkg.com/@dcloudio/uni-webview-js@0.0.1/index.js"></script>
@@ -76,7 +79,16 @@
             this.name = data.name // 赋值
             app.name = data.name // 赋值
         };
-
+function getLocationFromApp(data) {
+  console.log(JSON.stringify(data), 'HTML 接受APP发送过来的定位消息（SZRD-APP）');
+//拿到szrdAccessToken进行登录等操作
+// let szrdAccessToken= data.szrdAccessToken 
+};
+        function scanCodeFromApp(data) {
+  console.log(JSON.stringify(data), 'HTML 接受APP发送过来的扫一扫消息（SZRD-APP）');
+//拿到szrdAccessToken进行登录等操作
+// let szrdAccessToken= data.szrdAccessToken 
+};
         // 向nvue发送数据
         document.addEventListener('UniAppJSBridgeReady', function () {
 
@@ -89,13 +101,15 @@
                 });
             })
 
-            document.querySelector("#getLocation").addEventListener('click', function () {
+            document.querySelector("#getLocationButton").addEventListener('click', function () {
+                console.log("点击了------定位")
                 uni.postMessage({
                     type: 'getLocation'
                 });
             })
 
-            document.querySelector("#scanCode").addEventListener('click', function () {
+            document.querySelector("#scanCodeButton").addEventListener('click', function () {
+                console.log("点击了------扫码")
                 uni.postMessage({
                     type: 'scanCode'
                 });
